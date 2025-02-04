@@ -99,10 +99,12 @@ function handleYes() {
     
   // Reveal the message and hide other elements.
   document.getElementById("message").classList.remove("hidden");
-  document.getElementById("message").innerHTML = `<video src="/v1.mp4" autoplay="autoplay" loop="loop" muted=""></video><h2>Yay! 💕</h2><p>You've made me the happiest person in the world! 🥰</p>`;
+  document.getElementById("message").classList.remove("hidden");
+  document.getElementById("message").innerHTML = `<video src="/v2.mp4" autoplay="autoplay" loop="loop" muted=""></video><h2>Yay! 💕</h2><p>You've made me the happiest person in the world! 🥰</p>`;
   document.getElementById("a-btn").classList.add("hidden");
   document.getElementById("ques").classList.add("hidden"); 
   document.getElementById('Name2').classList.add("hidden");
+  document.getElementById('vid').classList.add("hidden");
 
   // Trigger celebratory animations.
   triggerConfetti();
