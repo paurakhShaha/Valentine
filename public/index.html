@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valentine URL Generator</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(45deg, #ff85a2, #ff6b6b);
+        font-family: "Arial", sans-serif;
+        text-align: center;
+      }
+
+      .container {
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        margin: 20px;
+        max-width: 90%;
+        width: 500px;
+      }
+
+      input#name {
+        padding: 15px 20px;
+        border: none;
+        border-radius: 25px;
+        font-size: 1.2em;
+        margin: 15px 0;
+        width: 80%;
+        outline: none;
+        transition: box-shadow 0.3s ease;
+      }
+
+      input#name:focus {
+        box-shadow: 0 0 10px rgba(196, 69, 105, 0.3);
+      }
+
+      button.el-btn {
+        padding: 15px 40px;
+        border: none;
+        border-radius: 25px;
+        font-size: 1.2em;
+        background: #c44569;
+        color: white;
+        cursor: pointer;
+        transition: transform 0.3s ease, background 0.3s ease;
+        margin: 10px 0;
+      }
+
+      button.el-btn:hover {
+        background: #a33457;
+        transform: translateY(-2px);
+      }
+
+      h1.url {
+        color: #c44569;
+        font-size: 1.2em;
+        margin-top: 20px;
+        word-break: break-all;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .error-message {
+        color: #ff4444;
+        margin-top: 10px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <input type="text" id="name" placeholder="Enter your name" />
+      <button class="el-btn">Generate Valentine URL ❤️</button>
+      <h1 class="url"></h1>
+    </div>
+
+    <script>
+      const btn = document.querySelector(".el-btn");
+      btn.addEventListener("click", () => {
+        const nameInput = document.getElementById("name");
+        const urlDisplay = document.querySelector(".url");
+
+        const name = nameInput.value.trim();
+        if (name) {
+          const url = `http://localhost:3000/greet/${encodeURIComponent(name)}`;
+          urlDisplay.textContent = url;
+          urlDisplay.style.color = "#c44569";
+          urlDisplay.classList.remove("error-message");
+
+          // Add temporary animation
+          urlDisplay.style.animation = "float 0.5s ease";
+          setTimeout(() => {
+            urlDisplay.style.animation = "";
+          }, 500);
+        } else {
+          urlDisplay.textContent = "Please enter a valid name ❤️";
+          urlDisplay.style.color = "#ff4444";
+          urlDisplay.classList.add("error-message");
+
+          // Add shake animation to input
+          nameInput.style.animation = "shake 0.4s ease";
+          setTimeout(() => {
+            nameInput.style.animation = "";
+          }, 400);
+        }
+      });
+
+      // Add keypress event for Enter key
+      document.getElementById("name").addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          btn.click();
+        }
+      });
+    </script>
+  </body>
+</html>
